@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ========================
+   THEME — Tailwind v4 CSS-based config
+   ======================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Brand Colors */
+  --color-navy: #0a1628;
+  --color-navy-light: #132035;
+  --color-green: #2d8a5e;
+  --color-green-light: #35a06c;
+  --color-cream: #f5f0e8;
+  --color-cream-dark: #e8e0d2;
+  --color-gold: #c8a456;
+  --color-red-soft: #c0392b;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Text Colors */
+  --color-text: #2a2a2a;
+  --color-text-light: #6b6b6b;
+  --color-text-on-dark: #c8c8c8;
+
+  /* Fonts */
+  --font-heading: var(--font-playfair-display), "Georgia", serif;
+  --font-body: var(--font-dm-sans), "Segoe UI", sans-serif;
+
+  /* Animations */
+  --animate-bounce-slow: bounce-slow 2s ease-in-out infinite;
+  --animate-pulse-shadow: pulse-shadow 3s ease-in-out infinite;
+  --animate-spin-slow: spin 1.5s linear infinite;
+
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @keyframes pulse-shadow {
+    0%, 100% { box-shadow: 0 20px 60px rgba(45, 138, 94, 0.12); }
+    50% { box-shadow: 0 20px 60px rgba(45, 138, 94, 0.25); }
   }
 }
 
+/* ========================
+   CSS Custom Properties
+   ======================== */
+:root {
+  --section-padding-y: 48px;
+  --section-padding-x: 20px;
+  --nav-height: 72px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-padding-y: 80px;
+    --section-padding-x: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-padding-y: 100px;
+  }
+}
+
+/* ========================
+   Base Styles
+   ======================== */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background-color: var(--color-cream);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ========================
+   Scroll Animation Classes
+   ======================== */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ========================
+   Accordion Animation
+   ======================== */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.accordion-content.is-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-content > div {
+  overflow: hidden;
+}
+
+/* ========================
+   Skip to Content (a11y)
+   ======================== */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-green);
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.3s;
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.skip-to-content:focus {
+  top: 0;
 }
