@@ -2,39 +2,36 @@
 
 import { Check, X, ArrowRight } from "lucide-react";
 import { WHO_YES, WHO_NO } from "@/lib/constants";
-import { AnimateOnScroll } from "./AnimateOnScroll";
+import { AnimateOnScroll, StaggerContainer, StaggerItem } from "./AnimateOnScroll";
 
 export function WhoIsItFor() {
   return (
     <section id="kinek-szol" className="relative bg-navy py-[var(--section-py)] overflow-hidden">
-      <div className="absolute top-[20%] right-0 w-[400px] h-[400px] rounded-full bg-green/[0.03] blur-[130px]" />
-      <div className="absolute bottom-0 left-[10%] w-[300px] h-[300px] rounded-full bg-gold/[0.02] blur-[100px]" />
-      <div className="absolute inset-0 grain-dark" />
-
-      <div className="relative z-10 mx-auto max-w-[1200px] px-6 md:px-10">
+      <div className="relative z-10 mx-auto max-w-[1100px] px-6 md:px-8">
         <AnimateOnScroll>
-          <div className="text-center mb-16 md:mb-20">
-            <span className="section-label text-green/80 justify-center">Kinek szól?</span>
-            <h2 className="font-heading font-semibold text-[28px] md:text-[38px] lg:text-[44px] leading-[1.1] text-white">
+          <div className="max-w-[560px] mb-14 md:mb-16">
+            <p className="font-body text-[12px] font-semibold uppercase tracking-[0.1em] text-green/70 mb-5">
+              Kinek szól?
+            </p>
+            <h2 className="font-body font-bold text-[26px] md:text-[36px] lg:text-[42px] leading-[1.1] tracking-[-0.02em] text-white">
               Te jó helyen jársz, ha...
             </h2>
           </div>
         </AnimateOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[920px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[880px]">
           <AnimateOnScroll direction="left">
-            <div className="relative rounded-2xl p-8 md:p-10 h-full border border-green/15 bg-gradient-to-br from-green/[0.06] to-green/[0.02]">
-              <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-green/[0.06] blur-[30px]" />
-              <h3 className="font-body text-[15px] font-semibold text-green mb-8 tracking-wide uppercase">
-                Az AI Ready neked szól, ha:
+            <div className="rounded-2xl bg-green/[0.06] border border-green/[0.1] p-7 md:p-8 h-full">
+              <h3 className="font-body text-[13px] font-semibold text-green/80 mb-6 uppercase tracking-[0.1em]">
+                Neked szól, ha:
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3.5">
                 {WHO_YES.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-green/15 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check size={11} className="text-green" strokeWidth={3} />
+                      <Check size={10} className="text-green" strokeWidth={3} />
                     </div>
-                    <span className="font-body text-[14px] text-cream/70 leading-[1.6]">
+                    <span className="font-body text-[14px] text-white/60 leading-[1.6]">
                       {item}
                     </span>
                   </li>
@@ -44,17 +41,17 @@ export function WhoIsItFor() {
           </AnimateOnScroll>
 
           <AnimateOnScroll direction="right">
-            <div className="relative rounded-2xl p-8 md:p-10 h-full border border-white/[0.06] bg-gradient-to-br from-white/[0.03] to-transparent">
-              <h3 className="font-body text-[15px] font-semibold text-red-soft/70 mb-8 tracking-wide uppercase">
+            <div className="rounded-2xl bg-white/[0.02] border border-white/[0.05] p-7 md:p-8 h-full">
+              <h3 className="font-body text-[13px] font-semibold text-white/30 mb-6 uppercase tracking-[0.1em]">
                 Nem neked szól, ha:
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3.5">
                 {WHO_NO.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-white/[0.05] flex items-center justify-center shrink-0 mt-0.5">
-                      <X size={11} className="text-cream/30" strokeWidth={3} />
+                    <div className="w-5 h-5 rounded-full bg-white/[0.04] flex items-center justify-center shrink-0 mt-0.5">
+                      <X size={10} className="text-white/20" strokeWidth={3} />
                     </div>
-                    <span className="font-body text-[14px] text-cream/40 leading-[1.6]">
+                    <span className="font-body text-[14px] text-white/30 leading-[1.6]">
                       {item}
                     </span>
                   </li>
@@ -64,16 +61,14 @@ export function WhoIsItFor() {
           </AnimateOnScroll>
         </div>
 
-        <AnimateOnScroll>
-          <div className="text-center mt-16">
-            <p className="font-body text-[16px] text-cream/50 mb-6">
-              Felismerted magad?
-            </p>
-            <a href="#feliratkozas" className="btn-primary">
-              Igen — feliratkozom a várólistára
-              <ArrowRight size={16} />
-            </a>
-          </div>
+        <AnimateOnScroll className="mt-14">
+          <a
+            href="#feliratkozas"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-green px-8 py-4 font-body text-[14px] font-semibold text-white hover:-translate-y-0.5 transition-all duration-300 shadow-[0_2px_8px_rgba(45,138,94,0.3)]"
+          >
+            Igen — feliratkozom a várólistára
+            <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+          </a>
         </AnimateOnScroll>
       </div>
     </section>

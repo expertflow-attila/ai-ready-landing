@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   variable: "--font-playfair-display",
   display: "swap",
@@ -20,7 +21,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "AI Ready — Készülj fel az AI-korszakra | Expert Flow",
   description:
-    "10 hetes online kurzus szolgáltatás-alapú egyéni vállalkozóknak. Nem programozást tanulsz — hanem azt, hogyan dolgozzon az AI helyetted. Rendszereket kapsz, nem elméleteket.",
+    "10 hetes online kurzus szolgáltatás-alapú egyéni vállalkozóknak. Nem programozást tanulsz — hanem azt, hogyan dolgozzon az AI helyetted.",
   keywords:
     "AI kurzus, mesterséges intelligencia, egyéni vállalkozó, automatizáció, ChatGPT, online kurzus, Expert Flow",
   openGraph: {
@@ -44,7 +45,9 @@ export default function RootLayout({
         <a href="#main-content" className="skip-to-content">
           Ugrás a tartalomhoz
         </a>
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
