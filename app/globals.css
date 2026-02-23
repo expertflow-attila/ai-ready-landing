@@ -2,24 +2,51 @@
 
 @theme inline {
   --color-navy: #0a1628;
-  --color-navy-light: #132035;
+  --color-navy-light: #0f1d32;
+  --color-navy-mid: #132842;
   --color-green: #2d8a5e;
-  --color-green-light: #35a06c;
-  --color-green-dark: #246e4b;
+  --color-green-light: #34d399;
+  --color-green-dark: #1a5c3d;
+  --color-emerald: #10b981;
   --color-cream: #f5f0e8;
   --color-cream-dark: #e8e0d2;
   --color-cream-light: #faf7f2;
   --color-gold: #c8a456;
-  --color-gold-light: #d4b76a;
-  --color-red-soft: #c0392b;
-  --color-white: #ffffff;
-  --color-surface: #fafaf8;
+  --color-gold-light: #f59e0b;
+  --color-red-soft: #ef4444;
 
-  --color-text: #1a1a1a;
+  --color-text: #2a2a2a;
   --color-text-light: #6b6b6b;
 
   --font-heading: var(--font-playfair-display), "Georgia", serif;
   --font-body: var(--font-dm-sans), "Segoe UI", sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 4s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 8s ease infinite;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-12px) rotate(1deg); }
+    66% { transform: translateY(6px) rotate(-0.5deg); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
 }
 
 /* ========================
@@ -29,10 +56,9 @@
   --section-py: 80px;
   --nav-height: 72px;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
-@media (min-width: 768px) { :root { --section-py: 100px; } }
-@media (min-width: 1024px) { :root { --section-py: 128px; } }
+@media (min-width: 768px) { :root { --section-py: 112px; } }
+@media (min-width: 1024px) { :root { --section-py: 140px; } }
 
 /* ========================
    Base
@@ -44,14 +70,14 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text);
-  background-color: var(--color-surface);
+  color: #e2e8f0;
+  background-color: var(--color-navy);
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: rgba(45, 138, 94, 0.15);
-  color: var(--color-navy);
+  background-color: rgba(45, 138, 94, 0.3);
+  color: white;
 }
 
 *:focus-visible {
@@ -60,42 +86,189 @@ body {
 }
 
 /* ========================
-   Typography
+   Mesh Gradient Backgrounds
    ======================== */
-.text-balance {
-  text-wrap: balance;
+.mesh-hero {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(45, 138, 94, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(200, 164, 86, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 50% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #0a1628 0%, #0f1d32 100%);
+}
+
+.mesh-dark {
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(45, 138, 94, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(200, 164, 86, 0.04) 0%, transparent 50%),
+    linear-gradient(180deg, #0a1628 0%, #0e1a2e 100%);
+}
+
+.mesh-dark-alt {
+  background:
+    radial-gradient(ellipse 50% 50% at 30% 20%, rgba(200, 164, 86, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(45, 138, 94, 0.1) 0%, transparent 50%),
+    linear-gradient(180deg, #0e1a2e 0%, #0a1628 100%);
+}
+
+.mesh-warm {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(200, 164, 86, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 70%, rgba(45, 138, 94, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #0f1d32 0%, #0a1628 100%);
+}
+
+.mesh-green {
+  background:
+    radial-gradient(ellipse 80% 60% at 40% 40%, rgba(45, 138, 94, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 10% 10%, rgba(200, 164, 86, 0.06) 0%, transparent 50%),
+    linear-gradient(145deg, #1a5c3d 0%, #0f3d28 50%, #0a1628 100%);
 }
 
 /* ========================
-   Layered Shadows
+   Gradient Text
    ======================== */
-.shadow-layered-sm {
-  box-shadow:
-    0 1px 1px hsl(220deg 40% 10% / 0.04),
-    0 2px 2px hsl(220deg 40% 10% / 0.04),
-    0 4px 4px hsl(220deg 40% 10% / 0.04),
-    0 8px 8px hsl(220deg 40% 10% / 0.04);
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-green-light), var(--color-green), var(--color-emerald));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.shadow-layered {
-  box-shadow:
-    0 1px 1px hsl(220deg 40% 10% / 0.035),
-    0 2px 2px hsl(220deg 40% 10% / 0.035),
-    0 4px 4px hsl(220deg 40% 10% / 0.035),
-    0 8px 8px hsl(220deg 40% 10% / 0.035),
-    0 16px 16px hsl(220deg 40% 10% / 0.035);
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light), var(--color-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.shadow-layered-lg {
-  box-shadow:
-    0 1px 1px hsl(220deg 40% 10% / 0.03),
-    0 2px 2px hsl(220deg 40% 10% / 0.03),
-    0 4px 4px hsl(220deg 40% 10% / 0.03),
-    0 8px 8px hsl(220deg 40% 10% / 0.03),
-    0 16px 16px hsl(220deg 40% 10% / 0.03),
-    0 32px 32px hsl(220deg 40% 10% / 0.03);
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #ffffff 0%, #34d399 40%, #2d8a5e 70%, #c8a456 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ========================
-   Accordion (CSS grid)
+   Glassmorphic Cards
+   ======================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  transition: all 0.4s var(--ease-out-expo);
+}
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(45, 138, 94, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(45, 138, 94, 0.1), 0 0 0 1px rgba(45, 138, 94, 0.05);
+}
+
+/* Gradient border card */
+.gradient-border-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.gradient-border-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(45, 138, 94, 0.3), rgba(200, 164, 86, 0.15), rgba(16, 185, 129, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ========================
+   Glow Effects
+   ======================== */
+.glow-green {
+  box-shadow: 0 0 20px rgba(45, 138, 94, 0.15), 0 0 60px rgba(45, 138, 94, 0.1);
+}
+.glow-green-strong {
+  box-shadow: 0 4px 16px rgba(45, 138, 94, 0.2), 0 8px 40px rgba(45, 138, 94, 0.15), 0 0 80px rgba(45, 138, 94, 0.1);
+}
+.glow-gold {
+  box-shadow: 0 0 20px rgba(200, 164, 86, 0.1), 0 0 60px rgba(200, 164, 86, 0.05);
+}
+
+/* ========================
+   Premium Button
+   ======================== */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, #2d8a5e 0%, #34d399 50%, #2d8a5e 100%);
+  background-size: 200% 200%;
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border-radius: 100px;
+  box-shadow: 0 2px 8px rgba(45, 138, 94, 0.3), 0 8px 32px rgba(45, 138, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s var(--ease-out-expo);
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.btn-primary:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 138, 94, 0.35), 0 16px 48px rgba(45, 138, 94, 0.25), 0 0 80px rgba(45, 138, 94, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+/* ========================
+   Grain Texture (visible)
+   ======================== */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+}
+
+/* ========================
+   Dividers
+   ======================== */
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45, 138, 94, 0.2), rgba(200, 164, 86, 0.1), transparent);
+}
+
+.divider-subtle {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+}
+
+/* ========================
+   Accordion
    ======================== */
 .accordion-content {
   display: grid;
@@ -133,5 +306,4 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  html { scroll-behavior: auto; }
 }
