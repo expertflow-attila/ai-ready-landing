@@ -26,14 +26,14 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "bg-navy/80 backdrop-blur-2xl border-b border-white/[0.04]"
+          ? "bg-navy/90 backdrop-blur-xl border-b border-white/[0.06]"
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto max-w-[1200px] px-6 md:px-8 flex items-center justify-between h-[72px]">
-        <a href="#" className="group flex items-center gap-1.5">
+      <div className="mx-auto max-w-[1100px] px-6 md:px-8 flex items-center justify-between h-[72px]">
+        <a href="#" className="group flex items-center gap-1">
           <span className="font-heading text-[20px] font-bold text-white tracking-tight">Expert</span>
-          <span className="text-gradient font-heading text-[20px] font-bold tracking-tight">Flow</span>
+          <span className="font-heading text-[20px] font-bold tracking-tight text-green">Flow</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -41,7 +41,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="font-body text-[13px] font-medium text-white/40 hover:text-white transition-colors duration-300"
+              className="font-body text-[13px] font-medium text-dt-tertiary hover:text-white transition-colors duration-300"
             >
               {link.label}
             </a>
@@ -69,20 +69,19 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 md:hidden mesh-hero"
+            className="fixed inset-0 z-50 md:hidden bg-surface-0"
             role="dialog"
             aria-modal="true"
           >
-            <div className="absolute inset-0 grain" />
-            <div className="relative z-10 flex flex-col h-full">
+            <div className="flex flex-col h-full">
               <div className="flex items-center justify-between px-6 h-[72px]">
                 <span className="font-heading text-[20px] font-bold">
                   <span className="text-white">Expert</span>{" "}
-                  <span className="text-gradient">Flow</span>
+                  <span className="text-green">Flow</span>
                 </span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-white/40 hover:text-white transition-colors"
+                  className="p-2 text-dt-tertiary hover:text-white transition-colors"
                   aria-label="Menü bezárása"
                 >
                   <X size={22} strokeWidth={1.5} />
@@ -95,10 +94,10 @@ export function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-heading text-[36px] font-bold text-white/25 hover:text-white transition-colors duration-300"
+                    transition={{ delay: 0.1 + i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-heading text-[32px] font-bold text-dt-tertiary hover:text-white transition-colors duration-300"
                   >
                     {link.label}
                   </motion.a>
@@ -106,9 +105,9 @@ export function Navbar() {
                 <motion.a
                   href="#feliratkozas"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: 0.35, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   className="btn-primary self-start mt-4"
                 >
                   Feliratkozom
