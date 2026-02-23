@@ -13,42 +13,40 @@ const ICON_MAP: Record<string, React.ElementType> = {
 
 export function Solution() {
   return (
-    <section className="bg-cream py-[var(--section-padding-y)]">
-      <div className="mx-auto max-w-[1200px] px-5 md:px-10">
+    <section className="relative bg-cream py-[var(--section-py)] overflow-hidden">
+      <div className="absolute top-0 right-[10%] w-[300px] h-[300px] rounded-full bg-green/[0.03] blur-[100px]" />
+      <div className="absolute inset-0 grain" />
+
+      <div className="relative z-10 mx-auto max-w-[1200px] px-6 md:px-10">
         <AnimateOnScroll>
-          <div className="text-center mb-12 md:mb-16">
-            <p className="font-body text-xs uppercase tracking-[0.08em] text-green mb-4">
-              A MEGOLDÁS
-            </p>
-            <h2 className="font-heading font-bold text-2xl md:text-[36px] lg:text-[40px] leading-[1.2] text-navy mb-4">
-              Nem kurzust kapsz. Rendszert.
+          <div className="max-w-[640px] mb-16 md:mb-20">
+            <span className="section-label">A megoldás</span>
+            <h2 className="font-heading font-bold text-[28px] md:text-[38px] lg:text-[44px] leading-[1.1] text-navy mb-5">
+              Nem kurzust kapsz.
+              <br />
+              <span className="italic text-green font-normal">Rendszert.</span>
             </h2>
-            <p className="font-body text-[17px] text-text-light max-w-[680px] mx-auto leading-[1.7]">
-              Az AI Ready nem 50 videó és &apos;boldogulj&apos;. Ez egy 10 hetes, lépésről
-              lépésre vezető program, ahol minden héten EGY dolgot tanulsz meg
-              és be is vezeted a vállalkozásodba. Nem elmélet. Működő rendszer.
+            <p className="font-body text-[16px] md:text-[17px] text-text-light leading-[1.8]">
+              Az AI Ready nem 50 videó és &apos;boldogulj&apos;. Ez egy 10 hetes program, ahol minden héten EGY dolgot tanulsz meg és be is vezeted a vállalkozásodba.
             </p>
           </div>
         </AnimateOnScroll>
 
-        {/* Value props grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {VALUE_PROPS.map((prop, i) => {
             const Icon = ICON_MAP[prop.icon];
             return (
               <AnimateOnScroll key={prop.title} delay={i * 100}>
-                <div className="bg-white rounded-2xl p-8 shadow-[0_2px_20px_rgba(10,22,40,0.06)] transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(10,22,40,0.1)] h-full">
-                  {Icon && (
-                    <Icon
-                      size={36}
-                      className="text-green mb-4"
-                      strokeWidth={1.5}
-                    />
-                  )}
-                  <h3 className="font-body text-xl font-semibold text-navy mb-2">
+                <div className="card-premium group h-full">
+                  <div className="w-12 h-12 rounded-xl bg-green/[0.08] flex items-center justify-center mb-6 group-hover:bg-green/[0.14] transition-colors duration-500">
+                    {Icon && (
+                      <Icon size={22} className="text-green" strokeWidth={1.8} />
+                    )}
+                  </div>
+                  <h3 className="font-body text-[18px] font-semibold text-navy mb-3">
                     {prop.title}
                   </h3>
-                  <p className="font-body text-[15px] text-text-light leading-[1.7]">
+                  <p className="font-body text-[14px] text-text-light leading-[1.8]">
                     {prop.description}
                   </p>
                 </div>
