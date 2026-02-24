@@ -2,16 +2,16 @@ import { Instagram, Youtube, Linkedin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="relative bg-navy border-t border-white/[0.04]">
+    <footer className="relative border-t border-border-subtle">
       <div className="mx-auto max-w-[1100px] px-6 md:px-8 py-12">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           {/* Brand */}
           <div>
             <span className="font-heading text-[18px] font-bold">
-              <span className="text-white">Expert</span>
-              <span className="text-green ml-1">Flow</span>
+              <span className="text-text-primary">Expert</span>
+              <span className="text-accent ml-1">Flow</span>
             </span>
-            <p className="font-heading italic text-[12px] text-dt-muted mt-1">
+            <p className="font-heading italic text-[12px] text-text-disabled mt-1">
               Új eszközök. Örök értékek.
             </p>
           </div>
@@ -22,7 +22,7 @@ export function Footer() {
               <a
                 key={label}
                 href="#"
-                className="font-body text-[12px] text-dt-muted hover:text-dt-tertiary transition-colors duration-200"
+                className="font-body text-[12px] text-text-disabled hover:text-text-tertiary transition-colors duration-200"
               >
                 {label}
               </a>
@@ -40,7 +40,7 @@ export function Footer() {
                 key={label}
                 href="#"
                 aria-label={label}
-                className="w-9 h-9 rounded-full border border-white/[0.06] flex items-center justify-center text-dt-muted hover:text-green hover:border-green/30 transition-all duration-300"
+                className="w-9 h-9 rounded-full border border-border-subtle flex items-center justify-center text-text-disabled hover:text-accent hover:border-accent/30 transition-all duration-300"
               >
                 <Icon size={14} strokeWidth={1.5} />
               </a>
@@ -48,9 +48,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="divider-dark mt-8 mb-6" />
+        <div className="divider mt-8 mb-6" />
 
-        <p className="font-body text-[11px] text-dt-muted">
+        <p className="font-body text-[11px] text-text-disabled">
           © 2026 Nagy Attila — Expert Flow. Minden jog fenntartva.
         </p>
       </div>

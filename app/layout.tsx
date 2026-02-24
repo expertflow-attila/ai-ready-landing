@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
@@ -40,14 +41,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="hu" className={`${playfairDisplay.variable} ${dmSans.variable}`}>
-      <body className="font-body antialiased">
-        <a href="#main-content" className="skip-to-content">
-          Ugrás a tartalomhoz
-        </a>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+    <html lang="hu" suppressHydrationWarning className={`${playfairDisplay.variable} ${dmSans.variable}`}>
+      <body className="font-body antialiased bg-bg-base text-text-primary">
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <a href="#main-content" className="skip-to-content">
+            Ugrás a tartalomhoz
+          </a>
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

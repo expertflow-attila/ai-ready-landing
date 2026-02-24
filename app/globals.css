@@ -1,34 +1,37 @@
 @import "tailwindcss";
 
+/* ============================================
+   Dark/Light mode variant for Tailwind v4
+   next-themes sets data-theme on <html>
+   ============================================ */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme inline {
-  /* ===========================
-     Brand Colors
-     =========================== */
-  --color-navy: #0a1628;
-  --color-navy-light: #0f1d32;
-  --color-navy-mid: #132842;
+  /* Semantic color tokens — resolve at runtime via CSS variables */
+  --color-bg-base: var(--bg-base);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-fg: var(--accent-fg);
+
+  /* Static brand colors (don't change with theme) */
   --color-green: #2d8a5e;
   --color-green-light: #34d399;
-  --color-green-dark: #1a5c3d;
-  --color-emerald: #10b981;
-  --color-cream: #f5f0e8;
-  --color-cream-dark: #ede6db;
-  --color-cream-light: #faf7f2;
   --color-gold: #c8a456;
-  --color-gold-light: #d4b06a;
   --color-red-soft: #dc6868;
-
-  /* Dark mode surface stepping (Linear-inspired) */
-  --color-surface-0: #0a1628;
-  --color-surface-1: #0f1d32;
-  --color-surface-2: #132842;
-  --color-surface-3: #1a3356;
-
-  /* Light text on dark */
-  --color-dt-primary: #ededef;
-  --color-dt-secondary: #94a3b8;
-  --color-dt-tertiary: #64748b;
-  --color-dt-muted: #475569;
 
   /* Fonts */
   --font-heading: var(--font-playfair-display), "Georgia", serif;
@@ -37,187 +40,185 @@
   /* Animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 4s ease-in-out infinite;
+  --animate-spin-border: spin-border 4s linear infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
   }
 
   @keyframes glow-pulse {
     0%, 100% { opacity: 0.3; }
     50% { opacity: 0.6; }
   }
+
+  @keyframes spin-border {
+    to { --border-angle: 360deg; }
+  }
 }
 
-/* ========================
-   Custom Properties
-   ======================== */
+/* ============================================
+   OKLCH Color System — Green hue (142°)
+   Dark mode = default
+   ============================================ */
 :root {
+  --hue: 155;
   --section-py: 80px;
   --nav-height: 72px;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* DARK MODE (default) */
+  --bg-base:     oklch(0.09 0.005 var(--hue));
+  --bg-subtle:   oklch(0.12 0.006 var(--hue));
+  --bg-elevated: oklch(0.15 0.007 var(--hue));
+  --bg-overlay:  oklch(0.18 0.008 var(--hue));
+
+  --border-subtle:  oklch(0.18 0.005 var(--hue));
+  --border-default: oklch(0.23 0.008 var(--hue));
+  --border-strong:  oklch(0.36 0.010 var(--hue));
+
+  --text-primary:   oklch(0.95 0.004 var(--hue));
+  --text-secondary: oklch(0.70 0.010 var(--hue));
+  --text-tertiary:  oklch(0.50 0.010 var(--hue));
+  --text-disabled:  oklch(0.36 0.006 var(--hue));
+
+  --accent:        oklch(0.68 0.18 var(--hue));
+  --accent-hover:  oklch(0.74 0.18 var(--hue));
+  --accent-subtle: oklch(0.68 0.18 var(--hue) / 0.12);
+  --accent-fg:     oklch(0.10 0.02 var(--hue));
 }
+
 @media (min-width: 768px) { :root { --section-py: 112px; } }
 @media (min-width: 1024px) { :root { --section-py: 140px; } }
 
-/* ========================
+/* LIGHT MODE */
+[data-theme="light"] {
+  --bg-base:     oklch(0.98 0.003 var(--hue));
+  --bg-subtle:   oklch(0.95 0.005 var(--hue));
+  --bg-elevated: oklch(1.00 0.000 0);
+  --bg-overlay:  oklch(0.92 0.005 var(--hue));
+
+  --border-subtle:  oklch(0.91 0.004 var(--hue));
+  --border-default: oklch(0.86 0.006 var(--hue));
+  --border-strong:  oklch(0.75 0.010 var(--hue));
+
+  --text-primary:   oklch(0.13 0.010 var(--hue));
+  --text-secondary: oklch(0.40 0.012 var(--hue));
+  --text-tertiary:  oklch(0.58 0.010 var(--hue));
+  --text-disabled:  oklch(0.72 0.006 var(--hue));
+
+  --accent:        oklch(0.52 0.18 var(--hue));
+  --accent-hover:  oklch(0.46 0.18 var(--hue));
+  --accent-subtle: oklch(0.52 0.18 var(--hue) / 0.10);
+  --accent-fg:     oklch(0.99 0.004 var(--hue));
+}
+
+/* ============================================
    Base
-   ======================== */
+   ============================================ */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
 }
 
 body {
   font-family: var(--font-body);
-  color: #1a1a2e;
-  background-color: var(--color-navy);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::selection {
-  background-color: rgba(45, 138, 94, 0.2);
-  color: inherit;
+  background-color: var(--accent-subtle);
+  color: var(--text-primary);
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-green);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-/* ========================
-   DARK SECTIONS
-   ======================== */
-.section-dark {
-  background-color: var(--color-surface-0);
-  color: var(--color-dt-primary);
-}
-
-.section-dark-alt {
-  background-color: var(--color-surface-1);
-  color: var(--color-dt-primary);
-}
-
-/* Hero — the ONE section with a radial glow */
-.section-hero {
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(45, 138, 94, 0.12) 0%, transparent 70%),
-    linear-gradient(180deg, #0a1628 0%, #0e1a2e 100%);
-  color: var(--color-dt-primary);
-}
-
-/* Green CTA section */
-.section-dark-green {
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45, 138, 94, 0.18) 0%, transparent 70%),
-    linear-gradient(160deg, #0f2a1e 0%, #0a1628 100%);
-  color: var(--color-dt-primary);
-}
-
-/* ========================
-   LIGHT SECTIONS
-   ======================== */
-.section-light {
-  background-color: var(--color-cream);
-  color: #1a1a2e;
-}
-
-.section-light-alt {
-  background-color: var(--color-cream-light);
-  color: #1a1a2e;
-}
-
-/* ========================
-   Section Dividers
-   ======================== */
-.divider-dark {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-}
-
-.divider-light {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
-}
-
-/* ========================
-   CARDS — Dark (Border-driven, Linear-style)
-   ======================== */
-.card-dark {
-  background-color: var(--color-surface-1);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* ============================================
+   Cards
+   ============================================ */
+.card {
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
   transition: all 0.35s var(--ease-out-expo);
 }
-.card-dark:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  background-color: var(--color-surface-2);
+.card:hover {
+  border-color: var(--border-default);
+  background-color: var(--bg-elevated);
 }
 
-/* ========================
-   CARDS — Light (Shadow-driven, Stripe-style)
-   ======================== */
-.card-light {
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+/* ============================================
+   Spotlight Card (mouse-following glow)
+   ============================================ */
+.spotlight-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.04),
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    0 12px 36px rgba(0, 0, 0, 0.02);
-  transition: all 0.35s var(--ease-out-expo);
+  overflow: hidden;
+  transition: border-color 0.35s var(--ease-out-expo);
 }
-.card-light:hover {
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.06),
-    0 8px 24px rgba(0, 0, 0, 0.05),
-    0 20px 48px rgba(0, 0, 0, 0.03);
-  transform: translateY(-2px);
+.spotlight-card:hover {
+  border-color: var(--border-default);
+}
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: radial-gradient(500px circle at var(--mouse-x) var(--mouse-y), var(--accent-subtle), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
 }
 
-/* ========================
-   Gradient Text (sparingly — hero + 1-2 accents)
-   ======================== */
+/* ============================================
+   Gradient Text (sparingly)
+   ============================================ */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-green), var(--color-emerald));
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ========================
+/* ============================================
    Buttons
-   ======================== */
+   ============================================ */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 16px 36px;
-  background-color: var(--color-green);
-  color: white;
+  background-color: var(--accent);
+  color: var(--accent-fg);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.01em;
   border-radius: 100px;
-  box-shadow:
-    0 2px 8px rgba(45, 138, 94, 0.25),
-    0 8px 24px rgba(45, 138, 94, 0.15);
-  transition: all 0.35s var(--ease-out-expo);
+  box-shadow: 0 2px 12px var(--accent-subtle);
+  transition: all 0.3s var(--ease-out-expo);
+  will-change: transform;
 }
 .btn-primary:hover {
-  background-color: #348f65;
+  background-color: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow:
-    0 4px 12px rgba(45, 138, 94, 0.3),
-    0 12px 36px rgba(45, 138, 94, 0.2);
+  box-shadow: 0 4px 20px var(--accent-subtle), 0 8px 40px var(--accent-subtle);
+}
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-secondary {
@@ -225,28 +226,37 @@ body {
   align-items: center;
   gap: 10px;
   padding: 16px 36px;
-  background-color: white;
-  color: var(--color-navy);
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.01em;
   border-radius: 100px;
-  box-shadow:
-    0 2px 8px rgba(255, 255, 255, 0.1),
-    0 8px 24px rgba(255, 255, 255, 0.06);
-  transition: all 0.35s var(--ease-out-expo);
+  border: 1px solid var(--border-default);
+  transition: all 0.3s var(--ease-out-expo);
+  will-change: transform;
 }
 .btn-secondary:hover {
+  background-color: var(--bg-overlay);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
-  box-shadow:
-    0 4px 12px rgba(255, 255, 255, 0.15),
-    0 12px 36px rgba(255, 255, 255, 0.1);
+}
+.btn-secondary:active {
+  transform: translateY(0) scale(0.98);
 }
 
-/* ========================
+/* ============================================
+   Section Dividers
+   ============================================ */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
+
+/* ============================================
    Accordion
-   ======================== */
+   ============================================ */
 .accordion-content {
   display: grid;
   grid-template-rows: 0fr;
@@ -259,22 +269,42 @@ body {
   overflow: hidden;
 }
 
-/* ========================
-   Glow (used ONLY on waitlist card)
-   ======================== */
-.glow-green {
-  box-shadow: 0 0 20px rgba(45, 138, 94, 0.15), 0 0 60px rgba(45, 138, 94, 0.08);
+/* ============================================
+   Animated gradient border
+   ============================================ */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
-/* ========================
+.border-glow {
+  position: relative;
+  border-radius: 20px;
+}
+.border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  padding: 1px;
+  background: conic-gradient(from var(--border-angle), transparent 30%, var(--accent) 50%, transparent 70%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-border 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ============================================
    Accessibility
-   ======================== */
+   ============================================ */
 .skip-to-content {
   position: absolute;
   top: -50px;
   left: 0;
-  background: var(--color-green);
-  color: white;
+  background: var(--accent);
+  color: var(--accent-fg);
   padding: 12px 24px;
   z-index: 200;
   transition: top 0.3s;

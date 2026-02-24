@@ -11,10 +11,22 @@ interface AnimateOnScrollProps {
 }
 
 const variants = {
-  up: { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } },
-  left: { hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0 } },
-  right: { hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0 } },
-  fade: { hidden: { opacity: 0 }, visible: { opacity: 1 } },
+  up: {
+    hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
+    visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+  },
+  left: {
+    hidden: { opacity: 0, x: -28, filter: "blur(4px)" },
+    visible: { opacity: 1, x: 0, filter: "blur(0px)" },
+  },
+  right: {
+    hidden: { opacity: 0, x: 28, filter: "blur(4px)" },
+    visible: { opacity: 1, x: 0, filter: "blur(0px)" },
+  },
+  fade: {
+    hidden: { opacity: 0, filter: "blur(4px)" },
+    visible: { opacity: 1, filter: "blur(0px)" },
+  },
 };
 
 export function AnimateOnScroll({
@@ -27,12 +39,12 @@ export function AnimateOnScroll({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={variants[direction]}
       transition={{
-        duration: 0.7,
+        duration: 0.65,
         delay: delay / 1000,
-        ease: [0.25, 1, 0.5, 1],
+        ease: [0.25, 0.1, 0.25, 1],
       }}
       className={cn(className)}
     >
@@ -41,28 +53,23 @@ export function AnimateOnScroll({
   );
 }
 
-/* Stagger container for child elements */
 export function StaggerContainer({
   children,
   className,
-  stagger = 0.08,
-  delayChildren = 0.1,
+  stagger = 0.1,
 }: {
   children: React.ReactNode;
   className?: string;
   stagger?: number;
-  delayChildren?: number;
 }) {
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={{
         hidden: {},
-        visible: {
-          transition: { staggerChildren: stagger, delayChildren },
-        },
+        visible: { transition: { staggerChildren: stagger, delayChildren: 0.1 } },
       }}
       className={cn(className)}
     >
@@ -81,11 +88,12 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] },
+          filter: "blur(0px)",
+          transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
         },
       }}
       className={cn(className)}
